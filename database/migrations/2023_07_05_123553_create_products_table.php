@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 300)->nullable()->unique();
-            $table->double('price', 9, 2)->nullable();
-            $table->tinyInteger('status')->nullable()->default(1);
+            $table->string('name', 300)->unique();
+            $table->double('price', 9, 2);
+            $table->tinyInteger('status')->default(1);
             $table->string('link', 300)->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreignId('usuario_inclusao_id')->nullable()->constrained('users');
-            $table->foreignId('usuario_edicao_id')->nullable()->constrained('users');
+            $table->foreignId('user_include_id')->nullable()->constrained('users');
+            $table->foreignId('user_edition_id')->nullable()->constrained('users');
         });
     }
 

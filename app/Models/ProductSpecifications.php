@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ProductSpecifications extends Model
 {
     use HasFactory;
+
+    protected $fillable =[
+        'quantity',
+        'size'
+    ];
 }
+

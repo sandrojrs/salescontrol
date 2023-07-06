@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('description', 100)->nullable();
             $table->string('photo', 500)->nullable();
-            $table->tinyInteger('default')->nullable()->default(0);
-            $table->tinyInteger('status')->nullable()->default(1);
+            $table->tinyInteger('default')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreignId('product_id')->nullable()->constrained('products');
-            $table->foreignId('usuario_inclusao_id')->nullable()->constrained('users');
-            $table->foreignId('usuario_edicao_id')->nullable()->constrained('users');
+            $table->foreignId('user_include_id')->nullable()->constrained('users');
+            $table->foreignId('user_edition_id')->nullable()->constrained('users');
         });
     }
 
