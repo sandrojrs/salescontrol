@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductPhotos;
+use App\Models\ProductSpecifications;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
@@ -61,17 +62,32 @@ class ProductController extends Controller
        
                 $default = $i <= 0 ? 1 : 0;
 
-                $path = $foto->store('fotos', 'public');
+                $nomeFoto = uniqid() . '.' . $foto->getClientOriginalExtension();
+
+                $photo = $foto->storeAs('public/fotos' .$nomeFoto);
+
+              //  $path = $foto->store('fotos', 'public');
 
                 ProductPhotos::create([
                 'description' => $request->description,
-                'photo' => $path,
+                'photo' => $nomeFoto,
                 'default' => $default,
                 'product_id' => $idProduto
             ]);
                 $i++;
             }
          
+        }
+
+        $sizes = $request->size;
+        $quantitys = $request->quantity;
+
+        foreach($sizes as $key => $size) {
+            ProductSpecifications::create([
+                'size' => $size,
+                'quantity' => $quantitys[$key],
+                'product_id' => $idProduto
+            ]);
         }
 
         return redirect()->route('products.index')

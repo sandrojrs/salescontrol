@@ -45,7 +45,9 @@
     @if(!empty($product->productPhoto))
         @foreach($product->productPhoto as $photo)
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-             <img src="{{ asset('storage/' . $photo->photo) }}" width="100%" />
+
+          <img src="{{ asset($photo->photoUrl) }}" alt="Foto" />
+             <!-- <img src="{{ asset('storage/' . $photo->photo) }}" width="100%" /> -->
         
         @endforeach
              </div>

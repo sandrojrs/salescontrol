@@ -32,12 +32,7 @@ class ProductPhotos extends Model
 
     public function getPhotoUrlAttribute()
     {
-        return $this->attributes['photo'] != null ? env('APP_URL_STORAGE') . $this->photo : null;
-    }
-
-    public function getUrlAttribute()
-    {
-        return str_contains($this->attributes['url'], 'http') == true ? $this->attributes['url'] : 'http://'.$this->attributes['url'];
+        return $this->attributes['photo'] != null ? 'storage/fotos' . $this->photo : null;
     }
 
     public function productSpecification(): HasMany

@@ -58,11 +58,33 @@
             <strong>Fotos:</strong>
             {!! Form::file('fotos[]', ['multiple' => true]) !!}
         </div>
+    </div><br/><br/>
+
+    <div class="row" id="original">
+        <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="form-group">
+                <strong>Quantidade:</strong>
+                {!! Form::number('quantity[]', null, array('placeholder' => 'Quantidade','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="form-group">
+                <strong>Tamanho:</strong>
+                {!! Form::text('size[]', null, array('placeholder' => 'Tamanho','class' => 'form-control')) !!}
+            </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3">
+            <div style="display:flex">
+                <a class="btn btn-primary adicionar" id="btn-clone" style="margin-top:20px">+</a>
+                <div class="botao_excluir"></div>
+            </div>
+        </div>
     </div>
+    
 
 
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top:20px">
+        <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
 </div>
 {!! Form::close() !!}
@@ -70,3 +92,25 @@
 
 <p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
+
+@vite(['resources/js/app.js']);
+
+<script type="module">
+$(document).ready(function() {
+    $("#btn-clone").click(function() {
+    // Clonar a div com o ID "original"
+    var clone = $("#original").clone();
+    
+    // Inserir o elemento clonado após a div original
+    clone.find(".adicionar").hide();
+    clone.insertAfter("#original");
+
+    // Adicionar um botão para remover o elemento clonado
+    var removeButton = $('<a class="btn btn-danger" style="margin-top:20px;margin-left:5px;">x</a>');
+        removeButton.click(function() {
+          clone.remove();
+        });
+        clone.find('.botao_excluir').append(removeButton);
+    });
+});
+</script>
