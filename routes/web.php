@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index']);
 
-Route::group(['middleware' => ['auth']], function() {
+Route::get('home', [HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
