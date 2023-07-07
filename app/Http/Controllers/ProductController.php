@@ -3,16 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductPhotos;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
+use DB;
+use Hash;
+use Illuminate\Support\Arr;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request):view
     {
         //
+        $data = Product::latest()->paginate(5);
+
+        return view('products.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -20,7 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::pluck('name', 'name')->all();
+        return view('products.create', compact('roles'));
     }
 
     /**
@@ -29,6 +42,40 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required|unique:products',
+            'price' => 'required'
+        ]);
+
+        $input = $request->all();
+
+        $product = Product::create($input);
+        $idProduto = $product->id;
+     
+        $i = 0;
+
+        if ($request->hasFile('fotos')) {
+            $fotos = $request->file('fotos');
+    
+            foreach ($fotos as $foto) {
+       
+                $default = $i <= 0 ? 1 : 0;
+
+                $path = $foto->store('fotos', 'public');
+
+                ProductPhotos::create([
+                'description' => $request->description,
+                'photo' => $path,
+                'default' => $default,
+                'product_id' => $idProduto
+            ]);
+                $i++;
+            }
+         
+        }
+
+        return redirect()->route('products.index')
+            ->with('success', 'Produto cadastrado com sucesso!');
     }
 
     /**
@@ -36,8 +83,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('products.show', compact('product'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -62,4 +110,5 @@ class ProductController extends Controller
     {
         //
     }
+    
 }
