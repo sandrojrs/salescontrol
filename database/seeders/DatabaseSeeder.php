@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $clients = DB::connection('mysql')
+            ->table('client_databases')
+            ->pluck('database_name');
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        foreach ($clients as $client) {
+            Config::set('database.connections.mysql.database', $client);
+            DB::connection('mysql')->reconnect();
+
+            $this->call(PermissionTableSeeder::class);
+            $this->call(CreateAdminUserSeeder::class);
+        }
     }
 }
