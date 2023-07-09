@@ -14,7 +14,8 @@ class Product extends Model
         'name',
         'price',
         'status',
-        'link'
+        'link',
+        'description',
     ];
 
     public function productPhoto(): HasMany

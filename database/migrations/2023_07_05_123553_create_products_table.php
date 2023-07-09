@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name', 300)->unique();
             $table->double('price', 9, 2);
             $table->tinyInteger('status')->default(1);
+            $table->text('description', 300)->nullable();
+            $table->text('image', 300)->nullable();
             $table->string('link', 300)->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -15,6 +15,12 @@ class ProductController extends Controller
         //
     }
 
+    public function productList()
+    {
+        $products = Product::all();
+        return view('products', compact('products'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
