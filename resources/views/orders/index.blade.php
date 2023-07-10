@@ -5,12 +5,13 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h2>Pedidos</h2>
-            </div>            
+            </div>
         </div>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-responsive table-bordered">
         <thead>
             <tr>
+                <th>-</th>
                 <th>id</th>
                 <th>Status</th>
                 <th>Código rastreio</th>
@@ -20,14 +21,15 @@
         @foreach ($orders as $key => $order)
             <tbody>
                 <tr class="table-primary">
+                    <td role="button" onclick="hiddeTable('table_{{ $key }}')">+</td>
                     <td>{{ $key }}</td>
                     <td>{{ $order->state }}</td>
                     <td>{{ $order->tracking_code }}</td>
                     <td>{{ $order->created_at }}</td>
                 </tr>
                 <tr>
-                    <td colspan="4">
-                        <table class="table mb-0">
+                    <td colspan="5">
+                        <table class="table mb-0 d-none" id="table_{{ $key }}">
                             <thead>
                                 <tr>
                                     <th>Produto</th>
@@ -52,4 +54,14 @@
             </tbody>
         @endforeach
     </table>
+    <script type="text/javascript">
+        function hiddeTable($id) {
+           let component = $('#' + $id);
+            if(component.hasClass("d-none")){
+                $('#' + $id).removeClass('d-none');
+            }else{
+                $('#' + $id).addClass('d-none');
+            }
+        }
+    </script>
 @endsection
