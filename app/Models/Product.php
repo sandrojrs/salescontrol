@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected  $primaryKey = 'id';
+
     protected $fillable = [
         'name',
         'price',
@@ -22,4 +24,16 @@ class Product extends Model
     {
         return $this->hasMany(ProductPhotos::class);
     }
+
+
+    public function productSpecification(): HasMany
+    {
+        return $this->hasMany(ProductSpecifications::class);
+    }
+
+    public function productVariation(): HasMany
+    {
+        return $this->hasMany(ProductSpecifications::class);
+    }
+    
 }
