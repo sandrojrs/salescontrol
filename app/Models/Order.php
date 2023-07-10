@@ -12,19 +12,19 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'quantity',
         'size',
         'state',
+        'user_id',
         'tracking_code'
     ];
 
-    public function User(): HasOne
+    public function user(): HasOne
     {
         return $this->hasOne(User::class);
     }
 
-    public function products(): BelongsToMany
+    public function orders()
     {
-        return $this->belongsToMany(Product::class, 'orders_products');
+        return $this->hasMany(OrderProducts::class, 'order_id', 'id');
     }
 }

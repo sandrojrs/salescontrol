@@ -56,7 +56,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Fotos:</strong>
-            {!! Form::file('fotos[]', ['multiple' => true, 'class'=> 'form-control form-control-sm']) !!}
+            {!! Form::file('fotos[]', ['multiple' => true]) !!}
         </div>
     </div><br/><br/>
 
@@ -90,6 +90,7 @@
 {!! Form::close() !!}
 
 
+<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
 
 @vite(['resources/js/app.js']);

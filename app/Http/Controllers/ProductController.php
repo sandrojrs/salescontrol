@@ -8,24 +8,49 @@ use App\Models\ProductSpecifications;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
-use DB;
-use Hash;
-use Illuminate\Support\Arr;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
+use \stdClass;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request):view
+    public function index(Request $request): view
     {
         //
         $data = Product::latest()->paginate(5);
 
         return view('products.index', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    public function productList()
+    {
+        $products = Product::all();
+        return view('products.list', compact('products'));
+    }
+
+    public function productVariation($product_id)
+    {
+        $product = Product::find($product_id);
+        foreach ($product->productVariation as $variation_id => $variation) {
+            $totalQuantity = 0;
+            foreach ($variation->orders as $key => $order) {
+                $totalQuantity += $order->quantity;
+            }
+            $totalQuantity =  $variation->quantity - $totalQuantity;
+
+            $productObj = new stdClass();
+            $productObj->id = $variation->id;
+            $productObj->name = $product->name;
+            $productObj->price = $product->price;
+            $productObj->size = $variation->size;
+            $productObj->quantity_available = $totalQuantity;
+            $productVariation[] = $productObj;
+        }
+
+        return view('products.list_variation', compact('productVariation'));
     }
 
     /**
@@ -52,37 +77,36 @@ class ProductController extends Controller
 
         $product = Product::create($input);
         $idProduto = $product->id;
-     
+
         $i = 0;
 
         if ($request->hasFile('fotos')) {
             $fotos = $request->file('fotos');
-    
+
             foreach ($fotos as $foto) {
-       
+
                 $default = $i <= 0 ? 1 : 0;
 
                 $nomeFoto = uniqid() . '.' . $foto->getClientOriginalExtension();
 
-                $photo = $foto->storeAs('public/fotos' .$nomeFoto);
+                $photo = $foto->storeAs('public/fotos' . $nomeFoto);
 
-              //  $path = $foto->store('fotos', 'public');
+                //  $path = $foto->store('fotos', 'public');
 
                 ProductPhotos::create([
-                'description' => $request->description,
-                'photo' => $nomeFoto,
-                'default' => $default,
-                'product_id' => $idProduto
-            ]);
+                    'description' => $request->description,
+                    'photo' => $nomeFoto,
+                    'default' => $default,
+                    'product_id' => $idProduto
+                ]);
                 $i++;
             }
-         
         }
 
         $sizes = $request->size;
         $quantitys = $request->quantity;
 
-        foreach($sizes as $key => $size) {
+        foreach ($sizes as $key => $size) {
             ProductSpecifications::create([
                 'size' => $size,
                 'quantity' => $quantitys[$key],
@@ -101,7 +125,7 @@ class ProductController extends Controller
     {
         return view('products.show', compact('product'));
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -128,5 +152,4 @@ class ProductController extends Controller
     {
         //
     }
-    
 }

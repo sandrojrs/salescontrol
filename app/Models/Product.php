@@ -14,16 +14,12 @@ class Product extends Model
         'name',
         'price',
         'status',
-        'link'
+        'link',
+        'description',
     ];
 
     public function productPhoto(): HasMany
     {
         return $this->hasMany(ProductPhotos::class);
-    }
-
-    public function productSpecification(): HasMany
-    {
-        return $this->hasMany(ProductSpecifications::class);
     }
 }

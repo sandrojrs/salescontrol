@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\order;
+use App\Models\stock;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class OrderController extends Controller
+class StockController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $orders = order::where('user_id', Auth::user()->id)->get();
-        return view('orders.index', compact('orders'));
+        //
     }
 
     /**
@@ -36,7 +34,7 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(order $order)
+    public function show(stock $stock)
     {
         //
     }
@@ -44,7 +42,7 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(order $order)
+    public function edit(stock $stock)
     {
         //
     }
@@ -52,7 +50,7 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, order $order)
+    public function update(Request $request, stock $stock)
     {
         //
     }
@@ -60,7 +58,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(order $order)
+    public function destroy(stock $stock)
     {
         //
     }
