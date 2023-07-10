@@ -21,4 +21,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductPhotos::class);
     }
+
+    public function productSpecification(): HasMany
+    {
+        return $this->hasMany(ProductSpecifications::class);
+    }
 }

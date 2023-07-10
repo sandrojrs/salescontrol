@@ -35,8 +35,5 @@ class ProductPhotos extends Model
         return $this->attributes['photo'] != null ? 'storage/fotos' . $this->photo : null;
     }
 
-    public function productSpecification(): HasMany
-    {
-        return $this->hasMany(ProductSpecifications::class);
-    }
+
 }
