@@ -9,20 +9,22 @@ class CartController extends Controller
     public function cartList()
     {
         $cartItems = \Cart::getContent();
-        // dd($cartItems);
         return view('shoppingCart.index', compact('cartItems'));
     }
-
 
     public function addToCart(Request $request)
     {
         \Cart::add([
             'id' => $request->id,
+            'size' => $request->size,
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
             'attributes' => array(
                 'image' => $request->image,
+                'product_specifications_id' => $request->product_specifications_id,
+                'quantity_available' =>  $request->quantity_available,
+                'size' => $request->size
             )
         ]);
         session()->flash('success', 'Product is Added to Cart Successfully !');

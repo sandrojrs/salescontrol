@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity');
-            $table->string('size', 10);
             $table->enum('state', ['pending', 'paid', 'delivered', 'send']);
             $table->string('tracking_code', 50)->nullable();            
             $table->timestamps();

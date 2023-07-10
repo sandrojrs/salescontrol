@@ -1,92 +1,82 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="my-8">
-        <div class="container px-6 mx-auto">
-            <div class="flex justify-center my-6">
-                <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
-                    @if ($message = Session::get('success'))
-                        <div class="p-4 mb-3 bg-green-400 rounded">
-                            <p class="text-green-800">{{ $message }}</p>
-                        </div>
-                    @endif
-                    <h3 class="text-3xl text-bold">Cart List</h3>
-                    <div class="flex-1">
-                        <table class="w-full text-sm lg:text-base" cellspacing="0">
-                            <thead>
-                                <tr class="h-12 uppercase">
-                                    <th class="hidden md:table-cell"></th>
-                                    <th class="text-left">Name</th>
-                                    <th class="pl-5 text-left lg:text-right lg:pl-0">
-                                        <span class="lg:hidden" title="Quantity">Qtd</span>
-                                        <span class="hidden lg:inline">Quantity</span>
-                                    </th>
-                                    <th class="hidden text-right md:table-cell"> price</th>
-                                    <th class="hidden text-right md:table-cell"> Remove </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($cartItems as $item)
-                                    <tr>
-                                        <td class="hidden pb-4 md:table-cell">
-                                            <a href="#">
-                                                <img src="{{ $item->attributes->image }}" class="w-20 rounded"
-                                                    alt="Thumbnail">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="#">
-                                                <p class="mb-2 md:ml-4">{{ $item->name }}</p>
+    <div class="card">
 
-                                            </a>
-                                        </td>
-                                        <td class="justify-center mt-6 md:justify-end md:flex">
-                                            <div class="h-10 w-28">
-                                                <div class="relative flex flex-row w-full h-8">
+        {{-- @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif --}}
+        
+        <div class="card-header">
+            Carrinho de compra
+            <form action="{{ route('orderProducts.store') }}" method="POST">
+                @csrf
+                <button class="btn btn-success" type="submit">Finalizar compra</button>
+            </form>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr class="align-text-center">
+                        <th scope="col">img produto</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Tamanho</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($cartItems as $item)
+                        <tr>
+                            <td>
+                                <a href="#">
+                                    <img src="{{ $item->attributes->image }}" class="w-20 rounded" alt="Thumbnail">
+                                </a>
+                            </td>
+                            <td>{{ $item->name }}</td>
+                            <td><span class="badge text-bg-primary">{{ $item->attributes->size }}</span></td>
 
-                                                    <form action="{{ route('cart.update') }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="id" value="{{ $item->id }}">
-                                                        <input type="number" name="quantity" value="{{ $item->quantity }}"
-                                                            class="w-6 text-center bg-gray-300" />
-                                                        <button type="submit"
-                                                            class="px-2 pb-2 ml-2 text-white bg-blue-500">update</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="hidden text-right md:table-cell">
-                                            <span class="text-sm font-medium lg:text-base">
-                                                ${{ $item->price }}
-                                            </span>
-                                        </td>
-                                        <td class="hidden text-right md:table-cell">
-                                            <form action="{{ route('cart.remove') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" value="{{ $item->id }}" name="id">
-                                                <button class="px-4 py-2 text-white bg-red-600">x</button>
-                                            </form>
+                            <td>
+                                <form action="{{ route('cart.update') }}" class="row g-3" method="POST">
+                                    @csrf
+                                    <div class="col-auto">
+                                        <input type="hidden" name="id" value="{{ $item->id }}">
+                                    </div>
+                                    <div class="col-auto">
+                                        <input type="number" max="{{ $item->attributes->quantity_available }}"
+                                            min="0" name="quantity" value="{{ $item->quantity }}"
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                                    </div>
+                                </form>
+                            </td>
 
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                        <div>
-                            Total: ${{ Cart::getTotal() }}
-                        </div>
-                        <div>
-                            <form action="{{ route('cart.clear') }}" method="POST">
-                                @csrf
-                                <button class="px-6 py-2 text-red-800 bg-red-300">Remove All Cart</button>
-                            </form>
-                        </div>
-
-
-                    </div>
-                </div>
+                            <td>${{ $item->price }}</td>
+                            <td class="hidden text-right md:table-cell">
+                                <form action="{{ route('cart.remove') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{ $item->id }}" name="id">
+                                    <button class="btn btn-danger">Remover</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer bg-transparent">
+            <div class="card-body">
+                Total: ${{ Cart::getTotal() }}
+                <form action="{{ route('cart.clear') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Remover todos os itens</button>
+                </form>
             </div>
         </div>
-    </main>
+    </div>
 @endsection
