@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderProductsController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 
 Auth::routes();
 
@@ -22,6 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', ProductController::class);
     Route::resource('orderProducts', OrderProductsController::class);
     Route::resource('orders', OrderController::class);
+    Route::resource('profile', ProfileController::class);
 
     Route::get('products-list', [ProductController::class, 'productList'])->name('products.list');
     Route::get('products-variation/{id}', [ProductController::class, 'productVariation'])->name('products.list.variation');

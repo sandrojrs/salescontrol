@@ -7,13 +7,13 @@
                 <div class="col-md-6">
                     <div class="pull-left">
                         <h2>Lista de Usuarios</h2>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="col-md-6">
-                  <div class=" m-2">
-                    <a class="btn btn-success" href="{{ route('users.create') }}"> Criar novo usuario</a>
-                </div>                    
-              </div>                
+                    <div class=" m-2">
+                        <a class="btn btn-success" href="{{ route('users.create') }}"> Criar novo usuario</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-body">

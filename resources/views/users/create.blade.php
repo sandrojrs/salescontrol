@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="inputEmail4" class="form-label">Email</label>
-                                    {!! Form::text('name', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
+                                    {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
                                 </div>
                                 <div class="col-md-6">
                                     <label for="inputPassword4" class="form-label">Senha</label>
