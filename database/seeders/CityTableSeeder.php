@@ -1,7 +1,8 @@
 <?php
-namespace Guiliredu\BrazilianCityMigrationSeed\Database\Seeds;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CityTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class CityTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('cities')->insert(array (
+        DB::table('cities')->insert(array (
             0 =>
             array (
                 'id' => '1',

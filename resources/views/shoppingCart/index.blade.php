@@ -8,7 +8,7 @@
                 <p>{{ $message }}</p>
             </div>
         @endif --}}
-        
+
         <div class="card-header">
             Carrinho de compra
             <form action="{{ route('orderProducts.store') }}" method="POST">
@@ -40,18 +40,22 @@
                             <td><span class="badge text-bg-primary">{{ $item->attributes->size }}</span></td>
 
                             <td>
-                                <form action="{{ route('cart.update') }}" class="row g-3" method="POST">
+                                <form action="{{ route('cart.update') }}" class="row g-3" method="POST" id="cartUpdate">
                                     @csrf
                                     <div class="col-auto">
                                         <input type="hidden" name="id" value="{{ $item->id }}">
                                     </div>
-                                    <div class="col-auto">
-                                        <input type="number" max="{{ $item->attributes->quantity_available }}"
-                                            min="0" name="quantity" value="{{ $item->quantity }}"
-                                            class="form-control">
-                                    </div>
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-primary">Atualizar</button>
+                                    <div class="col-md-4">
+                                        <select class="form-control" name="quantity" id='quantity'>
+                                            @for ($i = 1; $i <= $item->attributes->quantity_available; $i++)
+                                                @if ($item->quantity == $i)
+                                                    <option value="{{ $i }}" selected>{{ $i }}
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $i }}">{{ $i }}</option>
+                                                @endif
+                                            @endfor
+                                        </select>
                                     </div>
                                 </form>
                             </td>
@@ -79,4 +83,12 @@
             </div>
         </div>
     </div>
+    <script type="module">
+        $("#quantity").change(function(){
+            console.log('teste');
+            if ($(this).val()) {
+                $("#cartUpdate").submit();
+            }
+        })
+    </script>
 @endsection

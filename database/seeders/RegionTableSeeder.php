@@ -1,7 +1,10 @@
 <?php
-namespace Guiliredu\BrazilianCityMigrationSeed\Database\Seeds;
+
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades;
+use Illuminate\Support\Facades\DB;
 
 class RegionTableSeeder extends Seeder
 {
@@ -13,7 +16,7 @@ class RegionTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('regions')->insert(array (
+        DB::table('regions')->insert(array (
             0 =>
             array (
                 'id' => '1',

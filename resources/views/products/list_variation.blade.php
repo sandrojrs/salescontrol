@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="album py-5 bg-body-tertiary">
+    <div class="album py-2 bg-body-tertiary">
         <div class="container">
             <div class="alert alert-dark" role="alert">
                 {{ $productVariation[0]->name }}
@@ -20,7 +20,6 @@
                             <img src="" alt="" class="w-full max-h-60">
                             <div class="card-body">
                                 <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
-                                    {{ $variation->id }}
                                     @csrf
                                     <p class="card-text"><input type="hidden" value="{{ $variation->id }}" name="id">
                                     </p>
@@ -41,8 +40,8 @@
 
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="submit" class="btn btn-sm btn-outline-secondary">Adicionar ao
-                                                carrinho</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary {{$variation->quantity_available == 0 ? 'disabled': null}}">
+                                                {{$variation->quantity_available == 0 ? 'Produto sem estoque': 'Adicionar ao carrinho'}} </button>
                                         </div>
                                     </div>
                                 </form>
