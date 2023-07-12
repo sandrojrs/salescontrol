@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="row">
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Editar Produto</h2>
@@ -26,7 +27,7 @@
 @endif
 
 
-{!! Form::model($product, ['method' => 'PATCH','route' => ['products.update', $product->id]]) !!}
+{!! Form::model($product, ['method' => 'PATCH', 'files' => true, 'route' => ['products.update', $product->id]]) !!}
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
@@ -60,7 +61,7 @@
                 @foreach($product->productPhoto as $photo)
                 <div style="display:flex; margin-top:5px">
                     <img src="{{ asset($photo->photoUrl) }}" alt="Foto" /> 
-                    <a class="btn btn-danger btn-small" onclick="removerFoto()" style="height: 5%;margin-left:5px">remover</a>
+                    <a class="btn btn-danger btn-small" onclick="removerFoto({{$photo->id}})" style="height: 5%;margin-left:5px">remover</a>
                 </div>                
                 @endforeach
             @endif
@@ -97,27 +98,24 @@
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group">
                     <strong>Quantidade:</strong>
-                    {!! Form::number('quantity[]', $specification->quantity, array('placeholder' => 'Quantidade','class' => 'form-control' )) !!}
+                    {!! Form::number('quantity[]', $specification->quantity, array('disabled' => true,'placeholder' => 'Quantidade','class' => 'form-control' )) !!}
                 </div>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group">
                     <strong>Tamanho:</strong>
-                    {!! Form::text('size[]', $specification->size, array('placeholder' => 'Tamanho','class' => 'form-control')) !!}
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
-                <div style="display:flex">
-                <a class="btn btn-primary adicionar" style="margin-top:20px">+</a>
-                <div class="botao_excluir">
-                     <a class="btn btn-danger" style="margin-top:20px;margin-left:5px;" onclick="removerDiv(this)">x</a>
-                     </div>
+                    {!! Form::text('size[]', $specification->size, array('disabled' => true,'placeholder' => 'Tamanho','class' => 'form-control')) !!}
                 </div>
             </div>
         </div>
 
     @endforeach
             @endif
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                <a class="btn btn-primary adicionar"  style="margin-top:20px">+ Adicionar</a>
+                </div>
+            </div>
             <div id="original_clonados"></div>
     
     <div class="col-xs-12 col-sm-12 col-md-12 text-center m-4">
@@ -132,11 +130,22 @@
 
 <script type="module">
 $(document).ready(function() {
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     $(".adicionar").click(function() {
     // Clonar a div com o ID "original"
     var clone = $("#original").clone();
+
+    clone.removeAttr('id');
     
     clone.css('display', '');
+    var clonedInput = clone.find('input');
+    clonedInput.prop('required', true);
     clone.insertAfter("#original_clonados");
 
     // Adicionar um botão para remover o elemento clonado
@@ -150,5 +159,26 @@ $(document).ready(function() {
     function removerDiv(elemento) {
       elemento.remove();
     }
+
+    
 });
+</script>
+
+<script>
+
+
+function removerFoto(idFoto) {
+
+    var url = window.location;
+
+    $.ajax({   
+    type: "POST",
+    data : {'id':idFoto},
+    url: url.origin+"/products/"+idFoto+"/removerImagem",   
+    success: function(data){
+        $(window).prop("location", location.href);                   
+    }   
+    });   
+    return false;
+    }
 </script>

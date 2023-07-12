@@ -55,7 +55,6 @@
                         @else
                             <li><a class="nav-link" href="{{ route('users.index') }}">Usuarios</a></li>
                             <li><a class="nav-link" href="{{ route('products.index') }}">Produtos</a></li>
-                            <li><a class="nav-link" href="{{ route('products.index') }}">Produtos Lista</a></li>
                             <li><a class="nav-link" href="{{ route('roles.index') }}">Permissoes</a></li>
                             <li><a class="nav-link" href="{{ route('orders.index') }}">Pedidos</a></li>
                             <a href="{{ route('cart.list') }}" class=" items-center">

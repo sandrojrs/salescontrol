@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    Route::post('products/{id}/removerImagem', [ProductController::class, 'removerImagem'])->name('products.removerImagem');
     Route::resource('orderProducts', OrderProductsController::class);
     Route::resource('orders', OrderController::class);
 

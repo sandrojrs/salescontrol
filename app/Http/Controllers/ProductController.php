@@ -10,6 +10,9 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Illuminate\View\View;
 use \stdClass;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\RedirectResponse;
 
 class ProductController extends Controller
 {
@@ -142,14 +145,81 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
-    }
+       
+        $request->validate([
+            'price' => ['required'],
+            Rule::unique('products')->ignore($product->id),
+        ]);
 
+        $input = $request->all();
+        $product->update($input);
+
+        if ($request->hasFile('fotos')) {
+            $fotos = $request->file('fotos');
+
+            foreach ($fotos as $foto) {
+
+                $nomeFoto = uniqid() . '.' . $foto->getClientOriginalExtension();
+
+                $photo = $foto->storeAs('public/fotos' . $nomeFoto);
+
+                //  $path = $foto->store('fotos', 'public');
+
+                ProductPhotos::create([
+                    'photo' => $nomeFoto,
+                    'default' => 0,
+                    'product_id' => $product->id
+                ]);
+            }
+        }
+        
+        $sizes = $request->size;
+        $quantitys = $request->quantity;
+
+        foreach ($sizes as $key => $size) {
+            if($key > 0) {
+                ProductSpecifications::create([
+                    'size' => $size,
+                    'quantity' => $quantitys[$key],
+                    'product_id' => $product->id
+                ]);
+            }
+
+        }
+
+        return redirect()->route('products.index')
+            ->with('success', 'Produto atualizado com sucesso');
+
+
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product)
     {
-        //
+    //
+      $id = $product->id;
+      $post = Product::find($id);
+      $post->productPhoto->each->delete();
+      //$post->productPhoto->delete();
+      $post->productSpecification->each->delete();
+      $post->delete();
+
+      return redirect('/products');
+
+    }
+
+    public function removerImagem(Request $request) {
+      $id = $request->all();
+      if(!is_int($id) && $id <= 0) {
+        return false;
+      } 
+   
+      $productPhoto = ProductPhotos::findOrFail($id)->first();
+    
+      if(\Storage::disk('public')->delete('fotos'.$productPhoto->photo)) {
+        $productPhoto->delete();
+        return response()->json(['data' => array('status'=> 'sucesso')],200);
+      }     
     }
 }

@@ -52,6 +52,27 @@
         @endforeach
              </div>
     @endif 
-    
+
+    @if(!empty($product->productSpecification))
+                @foreach($product->productSpecification as $specification)                       
+          
+        <div class="row m-2">
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <div class="form-group">
+                    <strong>Quantidade:</strong>
+                    {{$specification->quantity}}
+                 
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <div class="form-group">
+                    <strong>Tamanho:</strong>
+                    {{$specification->size}}
+                </div>
+            </div>
+        </div>
+
+    @endforeach
+    @endif
 </div>
 @endsection

@@ -64,13 +64,13 @@
         <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
                 <strong>Quantidade:</strong>
-                {!! Form::number('quantity[]', null, array('placeholder' => 'Quantidade','class' => 'form-control')) !!}
+                {!! Form::number('quantity[]', null, array('placeholder' => 'Quantidade','class' => 'form-control','required' => 'required')) !!}
             </div>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
                 <strong>Tamanho:</strong>
-                {!! Form::text('size[]', null, array('placeholder' => 'Tamanho','class' => 'form-control')) !!}
+                {!! Form::text('size[]', null, array('placeholder' => 'Tamanho','class' => 'form-control','required' => 'required')) !!}
             </div>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3">
