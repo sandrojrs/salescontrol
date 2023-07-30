@@ -7,6 +7,7 @@ use App\Models\ProductPhotos;
 use App\Models\ProductSpecifications;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Spatie\Permission\Models\Role;
 use Illuminate\View\View;
 use \stdClass;
@@ -19,10 +20,17 @@ class ProductController extends Controller
     public function index(Request $request): view
     {
         //
-        $data = Product::latest()->paginate(5);
+        $products = Product::latest()->simplePaginate(5);
 
-        return view('products.index', compact('data'))
+        return view('products.list', compact('products'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+
+    public function productCategory(Category $category)
+    {
+        $products = Product::where('category_id', '=', $category->id)->get();
+        return view('storefront.products', compact('products', 'category'));
     }
 
     public function productList()
@@ -31,9 +39,16 @@ class ProductController extends Controller
         return view('products.list', compact('products'));
     }
 
-    public function productVariation($product_id)
+    public function productDetails(ProductSpecifications $productSpecifications)
     {
-        $product = Product::find($product_id);
+        $productsVariation = ProductSpecifications::find($productSpecifications->id);
+        return view('storefront.detail', compact('productsVariation'));
+    }
+
+    public function productVariation(Product $product)
+    {
+        $product = Product::find($product->id);
+        $productVariation = [];
         foreach ($product->productVariation as $variation_id => $variation) {
             $totalQuantity = 0;
             foreach ($variation->orders as $key => $order) {
@@ -50,7 +65,7 @@ class ProductController extends Controller
             $productVariation[] = $productObj;
         }
 
-        return view('products.list_variation', compact('productVariation'));
+        return view('storefront.products_variation', compact('productVariation', 'product'));
     }
 
     /**

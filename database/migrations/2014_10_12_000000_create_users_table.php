@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('number')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('phone')->nullable()->unique();
             $table->string('complement')->nullable();
             $table->string('city')->nullable();
             $table->string('uf')->nullable();
+            $table->string('active')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

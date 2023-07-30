@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +27,8 @@ class DatabaseSeeder extends Seeder
             $this->call(RegionTableSeeder::class);
             $this->call(StateTableSeeder::class);
             $this->call(CityTableSeeder::class);
-            // $this->call(ProductSeeder::class);
+            $this->call(CategorySeeder::class);
+            $this->call(ProductSeeder::class);
         }
     }
 }

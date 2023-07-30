@@ -1,13 +1,13 @@
 @php
     $html_tag_data = [];
     $title = 'General Settings';
-    $description= 'Ecommerce General Settings Page'
+    $description = 'Ecommerce General Settings Page';
 @endphp
-@extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
+@extends('layout', ['html_tag_data' => $html_tag_data, 'title' => $title, 'description' => $description])
 
 @section('css')
-    <link rel="stylesheet" href="/css/vendor/select2.min.css"/>
-    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css"/>
+    <link rel="stylesheet" href="/css/vendor/select2.min.css" />
+    <link rel="stylesheet" href="/css/vendor/select2-bootstrap4.min.css" />
 @endsection
 
 @section('js_vendor')
@@ -165,7 +165,8 @@ Dessert gummies soufflé toffee cake. Sesame snaps marzipan sesame snaps gummies
                                 </div>
                                 <div class="mb-0">
                                     <label class="form-label">Address</label>
-                                    <input type="text" class="form-control" value="4 Chome-38-5 Nishishinjuku, Shinjuku City" />
+                                    <input type="text" class="form-control"
+                                        value="4 Chome-38-5 Nishishinjuku, Shinjuku City" />
                                 </div>
                             </form>
                         </div>

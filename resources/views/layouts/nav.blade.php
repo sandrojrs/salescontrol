@@ -15,7 +15,7 @@
     <div class="user-container d-flex">
         <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img class="profile" alt="profile" src="/img/profile/profile-1.webp" />
-            <div class="name">Zayn Hartley</div>
+            <div class="name">{{ Auth::user()->name }}</div>
         </a>
         <div class="dropdown-menu dropdown-menu-end user-menu wide">
             <div class="row mb-3 ms-0 me-0">
@@ -180,61 +180,51 @@
     <div class="menu-container flex-grow-1">
         <ul id="menu" class="menu">
             <li>
-                <a href="/Storefront/Home">
+                <a href="{{ route('home.index') }}">
                     <i data-acorn-icon="shop" class="icon" data-acorn-size="18"></i>
                     <span class="label">Inicio</span>
                 </a>
             </li>
             <li>
-                <a href="/Dashboard">
+                <a href="/dashboard">
                     <i data-acorn-icon="shop" class="icon" data-acorn-size="18"></i>
                     <span class="label">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="#products" data-href="/Products/List">
+                <a href="#products" data-href="{{ route('products.index') }}">
                     <i data-acorn-icon="cupcake" class="icon" data-acorn-size="18"></i>
                     <span class="label">Produtos</span>
                 </a>
                 <ul id="products">
                     <li>
-                        <a href="/Products/List">
+                        <a href="{{ route('products.index') }}">
                             <span class="label">Lista</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/Products/Detail">
-                            <span class="label">Detalhes</span>
                         </a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#orders" data-href="/Orders/List">
+                <a href="#orders" data-href="{{ route('orders.index') }}">
                     <i data-acorn-icon="cart" class="icon" data-acorn-size="18"></i>
                     <span class="label">Pedidos</span>
                 </a>
                 <ul id="orders">
                     <li>
-                        <a href="/Orders/List">
+                        <a href="{{ route('orders.index') }}">
                             <span class="label">Lista</span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="/Orders/Detail">
-                            <span class="label">Detalhes</span>
-                        </a>
-                    </li>
+                    </li>                    
                 </ul>
             </li>
             <li>
                 <a href="#customers" data-href="/Customers/List">
                     <i data-acorn-icon="user" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Usuarios</span>
+                    <span class="label">Usuários</span>
                 </a>
                 <ul id="customers">
                     <li>
-                        <a href="/Customers/List">
+                        <a href="{{ route('users.index') }}">
                             <span class="label">Lista</span>
                         </a>
                     </li>
@@ -248,42 +238,37 @@
             <li>
                 <a href="#storefront" data-href="/Storefront/Home">
                     <i data-acorn-icon="screen" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Storefront</span>
+                    <span class="label">Tela do cliente</span>
                 </a>
                 <ul id="storefront">
                     <li>
-                        <a href="/Storefront/Home">
-                            <span class="label">Home</span>
+                        <a href="{{ route('home.index') }}">
+                            <span class="label">Inicio</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="/Storefront/Filters">
-                            <span class="label">Filters</span>
-                        </a>
-                    </li>
-                    <li>
+                    {{-- <li>
                         <a href="/Storefront/Categories">
-                            <span class="label">Categories</span>
+                            <span class="label">Categorias</span>
                         </a>
                     </li>
                     <li>
                         <a href="/Storefront/Detail">
-                            <span class="label">Detail</span>
+                            <span class="label">Detalhes</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="/Storefront/Cart">
-                            <span class="label">Cart</span>
+                            <span class="label">Carrinho</span>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="/Storefront/Checkout">
-                            <span class="label">Checkout</span>
+                            <span class="label">Finalizar</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="/Storefront/Invoice">
-                            <span class="label">Invoice</span>
+                            <span class="label">Relatorios</span>
                         </a>
                     </li>
                 </ul>
@@ -292,12 +277,6 @@
                 <a href="/Shipping">
                     <i data-acorn-icon="shipping" class="icon" data-acorn-size="18"></i>
                     <span class="label">Shipping</span>
-                </a>
-            </li>
-            <li>
-                <a href="/Discount">
-                    <i data-acorn-icon="tag" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Desconto</span>
                 </a>
             </li>
             <li>

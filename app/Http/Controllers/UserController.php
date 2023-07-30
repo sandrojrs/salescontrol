@@ -14,11 +14,11 @@ use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request)
     {
-        $data = User::latest()->paginate(5);
+        $users = User::latest()->paginate(1);
 
-        return view('users.index', compact('data'))
+        return view('customers.list', compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -50,7 +50,7 @@ class UserController extends Controller
     public function show($id): View
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        return view('customers.detail', compact('user'));
     }
 
     public function edit($id): View

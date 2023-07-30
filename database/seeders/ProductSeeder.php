@@ -15,19 +15,16 @@ class ProductSeeder extends Seeder
     public function run()
     {
         Product::create([
-            'name' => 'Watch',
+            'name' => 'Camiseta polo',
             'price' => 250,
             'description' => 'Good watch',
+            'category_id' => 1
         ]);
         Product::create([
-            'name' => 'Bag',
+            'name' => 'Short',
             'price' => 350,
             'description' => 'Good Bag',
-        ]);
-        Product::create([
-            'name' => 'perfume',
-            'price' => 100,
-            'description' => 'Good perfume',
+            'category_id' => 1
         ]);
     }
 }

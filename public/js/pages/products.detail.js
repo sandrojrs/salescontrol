@@ -141,12 +141,6 @@ class ProductsDetail {
           let mockFile2 = {name: 'bread.webp', size: 267140};
           this.displayExistingFile(mockFile2, '/img/product/small/product-4.webp');
 
-          let mockFile3 = {name: 'cupcake.webp', size: 267140};
-          this.displayExistingFile(mockFile3, '/img/product/small/product-1.webp');
-
-          let mockFile4 = {name: 'pastry.webp', size: 267140};
-          this.displayExistingFile(mockFile4, '/img/product/small/product-7.webp');
-
           // Adding dz-started class to remove drop message
           this.element.classList.add('dz-started');
         },

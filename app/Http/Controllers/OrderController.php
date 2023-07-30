@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\order;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +13,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = order::where('user_id', Auth::user()->id)->get();
-        return view('orders.index', compact('orders'));
+        $orders = order::all();
+        return view('orders.list', compact('orders'));
+    }
+
+       /**
+     * Display the specified resource.
+     */
+    public function show(Order $order)
+    {
+        return view('orders.detail', compact('order'));
     }
 }

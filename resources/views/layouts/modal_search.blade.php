@@ -11,11 +11,11 @@
             <div class="modal-footer border-top justify-content-start ps-5 pe-5 pb-3 pt-3 border-0">
         <span class="text-alternate d-inline-block m-0 me-3">
           <i data-acorn-icon="arrow-bottom" data-acorn-size="15" class="text-alternate align-middle me-1"></i>
-          <span class="align-middle text-medium">Navigate</span>
+          <span class="align-middle text-medium">Navegar</span>
         </span>
                 <span class="text-alternate d-inline-block m-0 me-3">
           <i data-acorn-icon="arrow-bottom-left" data-acorn-size="15" class="text-alternate align-middle me-1"></i>
-          <span class="align-middle text-medium">Select</span>
+          <span class="align-middle text-medium">Selecionar</span>
         </span>
             </div>
         </div>

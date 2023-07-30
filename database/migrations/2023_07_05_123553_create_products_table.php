@@ -17,12 +17,13 @@ return new class extends Migration
             $table->double('price', 9, 2);
             $table->tinyInteger('status')->default(1);
             $table->text('description', 300)->nullable();
-            $table->text('image', 300)->nullable();
+            $table->string('image')->nullable();
             $table->string('link', 300)->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreignId('user_include_id')->nullable()->constrained('users');
+            $table->foreignId('category_id')->nullable()->constrained('categories');
             $table->foreignId('user_edition_id')->nullable()->constrained('users');
         });
     }

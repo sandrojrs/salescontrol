@@ -18,6 +18,7 @@ class Product extends Model
         'status',
         'link',
         'description',
+        'category_id'
     ];
 
     public function productPhoto(): HasMany
@@ -28,5 +29,10 @@ class Product extends Model
     public function productVariation(): HasMany
     {
         return $this->hasMany(ProductSpecifications::class);
+    }
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
 }

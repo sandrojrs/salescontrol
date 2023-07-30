@@ -1,9 +1,9 @@
 @php
     $html_tag_data = [];
     $title = 'Settings';
-    $description= 'Ecommerce Settings Page'
+    $description = 'Ecommerce Settings Page';
 @endphp
-@extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
+@extends('layout', ['html_tag_data' => $html_tag_data, 'title' => $title, 'description' => $description])
 
 @section('css')
 @endsection
@@ -13,6 +13,12 @@
 
 @section('js_page')
 @endsection
+
+<style>
+    .disable-div {
+        pointer-events: none;
+    }
+</style>
 
 @section('content')
     <div class="container">
@@ -24,7 +30,7 @@
                     <div class="w-auto sw-md-30">
                         <a href="#" class="muted-link pb-1 d-inline-block breadcrumb-back">
                             <i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
-                            <span class="text-small align-middle">Home</span>
+                            <span class="text-small align-middle">Inicio</span>
                         </a>
                         <h1 class="mb-0 pb-0 display-4" id="title">{{ $title }}</h1>
                     </div>
@@ -36,44 +42,22 @@
 
         <!-- Settings List Start -->
         <div class="row row-cols-1 row-cols-md-2 g-2">
-            <div class="col">
-                <a href="/Settings/General" class="card hover-border-primary h-100">
+            <div class="col disable-div">
+                <a href="/Settings/General" class="card hover-border-primary h-100 disabled">
                     <div class="card-body row g-0">
                         <div class="col-auto">
-                            <div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                                <i data-acorn-icon="gear" class="text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="d-flex flex-column ps-card justify-content-start">
-                                <div class="d-flex flex-column justify-content-center mb-2">
-                                    <div class="heading text-primary mb-0">General</div>
-                                </div>
-                                <div class="text-alternate">
-                                    Lollipop apple pie lollipop toffee croissant. Sugar plum fruitcake cotton candy lemon drops. Carrot cake fruitcake dragée pie cotton
-                                    candy sesame snaps lollipop croissant.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col">
-                <a href="/Settings/General" class="card hover-border-primary h-100">
-                    <div class="card-body row g-0">
-                        <div class="col-auto">
-                            <div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <div
+                                class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                                 <i data-acorn-icon="building" class="text-primary"></i>
                             </div>
                         </div>
                         <div class="col">
                             <div class="d-flex flex-column ps-card justify-content-start">
                                 <div class="d-flex flex-column justify-content-center mb-2">
-                                    <div class="heading text-primary mb-0">Company</div>
+                                    <div class="heading text-primary mb-0">Organização (Em breve)</div>
                                 </div>
                                 <div class="text-alternate">
-                                    Cheesecake bonbon chocolate bar. Tart sugar plum candy canes toffee sweet roll muffin oat cake. Chupa chups cookie icing tart tiramisu
-                                    chocolate cake.
+                                    Dados da organização
                                 </div>
                             </div>
                         </div>
@@ -84,40 +68,40 @@
                 <a href="/Settings/General" class="card hover-border-primary h-100">
                     <div class="card-body row g-0">
                         <div class="col-auto">
-                            <div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <div
+                                class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                                 <i data-acorn-icon="folders" class="text-primary"></i>
                             </div>
                         </div>
                         <div class="col">
                             <div class="d-flex flex-column ps-card justify-content-start">
                                 <div class="d-flex flex-column justify-content-center mb-2">
-                                    <div class="heading text-primary mb-0">Categories</div>
+                                    <div class="heading text-primary mb-0">Categorias</div>
                                 </div>
                                 <div class="text-alternate">
-                                    Marshmallow donut sweet roll. Wafer tootsie roll gingerbread croissant ice cream. Sweet roll ice cream marzipan croissant soufflé
-                                    fruitcake.
+                                    Categorias
                                 </div>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col">
+            <div class="col ">
                 <a href="/Settings/General" class="card hover-border-primary h-100">
                     <div class="card-body row g-0">
                         <div class="col-auto">
-                            <div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <div
+                                class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                                 <i data-acorn-icon="pin" class="text-primary"></i>
                             </div>
                         </div>
                         <div class="col">
                             <div class="d-flex flex-column ps-card justify-content-start">
                                 <div class="d-flex flex-column justify-content-center mb-2">
-                                    <div class="heading text-primary mb-0">Localisation</div>
+                                    <div class="heading text-primary mb-0">Localização (Em breve)</div>
                                 </div>
                                 <div class="text-alternate">
-                                    Chocolate bar sesame snaps tootsie roll donut apple pie. Tart chocolate cake pastry cupcake croissant chocolate. Gingerbread danish
-                                    tiramisu.
+                                    Localização
                                 </div>
                             </div>
                         </div>
@@ -128,81 +112,18 @@
                 <a href="/Settings/General" class="card hover-border-primary h-100">
                     <div class="card-body row g-0">
                         <div class="col-auto">
-                            <div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                                <i data-acorn-icon="coin" class="text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="d-flex flex-column ps-card justify-content-start">
-                                <div class="d-flex flex-column justify-content-center mb-2">
-                                    <div class="heading text-primary mb-0">Currencies</div>
-                                </div>
-                                <div class="text-alternate">
-                                    Halvah jujubes bonbon gummies caramels. Carrot cake pie caramels caramels. Wafer tootsie roll gingerbread croissant ice cream.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col">
-                <a href="/Settings/General" class="card hover-border-primary h-100">
-                    <div class="card-body row g-0">
-                        <div class="col-auto">
-                            <div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <div
+                                class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                                 <i data-acorn-icon="wallet" class="text-primary"></i>
                             </div>
                         </div>
                         <div class="col">
                             <div class="d-flex flex-column ps-card justify-content-start">
                                 <div class="d-flex flex-column justify-content-center mb-2">
-                                    <div class="heading text-primary mb-0">Payment</div>
+                                    <div class="heading text-primary mb-0">Pagamentos</div>
                                 </div>
                                 <div class="text-alternate">
-                                    Dessert sweet roll cake lollipop. Jelly-o danish donut tiramisu biscuit toffee tart tootsie roll lemon drops. Lemon drops powder.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col">
-                <a href="/Settings/General" class="card hover-border-primary h-100">
-                    <div class="card-body row g-0">
-                        <div class="col-auto">
-                            <div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                                <i data-acorn-icon="file-text" class="text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="d-flex flex-column ps-card justify-content-start">
-                                <div class="d-flex flex-column justify-content-center mb-2">
-                                    <div class="heading text-primary mb-0">Billing</div>
-                                </div>
-                                <div class="text-alternate">
-                                    Macaroon candy ice cream candy canes chocolate bar sesame snaps jelly pudding caramels. Dragée macaroon lemon drops icing cupcake
-                                    gingerbread.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col">
-                <a href="/Settings/General" class="card hover-border-primary h-100">
-                    <div class="card-body row g-0">
-                        <div class="col-auto">
-                            <div class="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                                <i data-acorn-icon="content" class="text-primary"></i>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="d-flex flex-column ps-card justify-content-start">
-                                <div class="d-flex flex-column justify-content-center mb-2">
-                                    <div class="heading text-primary mb-0">Taxes</div>
-                                </div>
-                                <div class="text-alternate">
-                                    Dragée macaroon lemon drops icing cupcake gingerbread. Apple pie caramels tart. Caramels brownie gummies.
+                                    Tipos de pagamentos
                                 </div>
                             </div>
                         </div>

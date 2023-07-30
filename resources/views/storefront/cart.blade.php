@@ -1,9 +1,9 @@
 @php
     $html_tag_data = [];
     $title = 'Cart';
-    $description= 'Ecommerce Cart Page'
+    $description = 'Carrinho de compras';
 @endphp
-@extends('layout',['html_tag_data'=>$html_tag_data, 'title'=>$title, 'description'=>$description])
+@extends('layout', ['html_tag_data' => $html_tag_data, 'title' => $title, 'description' => $description])
 
 @section('css')
 @endsection
@@ -25,7 +25,7 @@
                     <div class="w-auto sw-md-30">
                         <a href="#" class="muted-link pb-1 d-inline-block breadcrumb-back">
                             <i data-acorn-icon="chevron-left" data-acorn-size="13"></i>
-                            <span class="text-small align-middle">Storefront</span>
+                            <span class="text-small align-middle">Inicio</span>
                         </a>
                         <h1 class="mb-0 pb-0 display-4" id="title">{{ $title }}</h1>
                     </div>
@@ -40,310 +40,113 @@
                 <!-- Items Start -->
                 <h2 class="small-title">Items</h2>
                 <div class="mb-5">
-                    <div class="card mb-2">
-                        <div class="row g-0 sh-18 sh-md-14">
-                            <div class="col-auto">
-                                <img src="/img/product/small/product-1.webp" class="card-img card-img-horizontal h-100 sw-9 sw-sm-13 sw-md-15" alt="thumb" />
-                            </div>
+                    @if (count($cartItems) == 0)
+                        @php $disabled = 'disabled' @endphp
+                        <div class="card mb-2">
                             <div class="col position-relative h-100">
                                 <div class="card-body">
                                     <div class="row h-100">
-                                        <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex align-items-center">
-                                            <div class="pt-0 pb-0 pe-2">
-                                                <div class="h6 mb-0 clamp-line" data-line="1">Wooden Animal Toys</div>
-                                                <div class="text-muted text-small">Wood & Toy</div>
-                                                <div class="mb-0 sw-19">$ 22.60</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 pe-0 d-flex align-items-center">
-                                            <div class="input-group spinner sw-11" data-trigger="spinner">
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-down single px-2 d-flex justify-content-center" data-spin="down">-</button>
-                                                </div>
-                                                <input type="text" class="form-control text-center px-0" value="4" data-rule="quantity" />
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-up single px-2 d-flex justify-content-center" data-spin="up">+</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 d-flex justify-content-end justify-content-md-start align-items-center">
-                                            <div class="h6 mb-0">$ 124.20</div>
-                                        </div>
+                                        <span> Nenhum produto adicionado </span>
                                     </div>
                                 </div>
-                                <button class="btn btn-sm btn-icon btn-icon-only btn btn-foreground-alternate position-absolute t-2 e-2" type="button">
-                                    <i data-acorn-icon="error-hexagon"></i>
-                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="row g-0 sh-18 sh-md-14">
-                            <div class="col-auto">
-                                <img src="/img/product/small/product-2.webp" class="card-img card-img-horizontal h-100 sw-9 sw-sm-13 sw-md-15" alt="thumb" />
-                            </div>
-                            <div class="col position-relative h-100">
-                                <div class="card-body">
-                                    <div class="row h-100">
-                                        <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex align-items-center">
-                                            <div class="pt-0 pb-0 pe-2">
-                                                <div class="h6 mb-0 clamp-line" data-line="1">Aromatic Green Candle</div>
-                                                <div class="text-muted text-small">Oakland</div>
-                                                <div class="mb-0 sw-19">$ 15.75</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 pe-0 d-flex align-items-center">
-                                            <div class="input-group spinner sw-11" data-trigger="spinner">
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-down single px-2 d-flex justify-content-center" data-spin="down">-</button>
-                                                </div>
-                                                <input type="text" class="form-control text-center px-0" value="1" data-rule="quantity" />
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-up single px-2 d-flex justify-content-center" data-spin="up">+</button>
+                    @endif
+
+                    @foreach ($cartItems as $item)
+                        <div class="card mb-2">
+                            <div class="row g-0 sh-18 sh-md-14">
+                                <div class="col-auto">
+                                    <img src="{{ $item->attributes->image }}"
+                                        class="card-img card-img-horizontal h-100 sw-9 sw-sm-13 sw-md-15" alt="thumb" />
+                                </div>
+                                <div class="col position-relative h-100">
+                                    <div class="card-body">
+                                        <div class="row h-100">
+                                            <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex align-items-center">
+                                                <div class="pt-0 pb-0 pe-2">
+                                                    <div class="h6 mb-0 clamp-line" data-line="1">Aromatic Green Candle
+                                                    </div>
+                                                    <div class="text-muted text-small">Oakland</div>
+                                                    <div class="mb-0 sw-19">$ 15.75</div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 d-flex justify-content-end justify-content-md-start align-items-center">
-                                            <div class="h6 mb-0">$ 15.75</div>
+                                            <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex align-items-center">
+                                                <div class="pt-0 pb-0 pe-2">
+                                                    <div class="h6 mb-0 clamp-line" data-line="1">Aromatic Green Candle
+                                                    </div>
+                                                    <div class="text-muted text-small">Oakland</div>
+                                                    <div class="mb-0 sw-19">$ 15.75</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 col-md-3 pe-0 d-flex align-items-center">
+                                                <div class="input-group spinner sw-11" data-trigger="spinner">
+                                                    <div class="input-group-text">
+                                                        <button type="button"
+                                                            class="spin-down single px-2 d-flex justify-content-center"
+                                                            data-spin="down">-</button>
+                                                    </div>
+                                                    <input type="text" class="form-control text-center px-0"
+                                                        value="1" data-rule="quantity" />
+                                                    <div class="input-group-text">
+                                                        <button type="button"
+                                                            class="spin-up single px-2 d-flex justify-content-center"
+                                                            data-spin="up">+</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="col-6 col-md-3 d-flex justify-content-end justify-content-md-start align-items-center">
+                                                <div class="h6 mb-0">$ 15.75</div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <button
+                                        class="btn btn-sm btn-icon btn-icon-only btn btn-danger position-absolute t-2 e-2 "
+                                        type="button">
+                                        <i data-acorn-icon="error-hexagon"></i>
+                                    </button>
                                 </div>
-                                <button class="btn btn-sm btn-icon btn-icon-only btn btn-foreground-alternate position-absolute t-2 e-2" type="button">
-                                    <i data-acorn-icon="error-hexagon"></i>
-                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="row g-0 sh-18 sh-md-14">
-                            <div class="col-auto">
-                                <img src="/img/product/small/product-3.webp" class="card-img card-img-horizontal h-100 sw-9 sw-sm-13 sw-md-15" alt="thumb" />
-                            </div>
-                            <div class="col position-relative h-100">
-                                <div class="card-body">
-                                    <div class="row h-100">
-                                        <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex align-items-center">
-                                            <div class="pt-0 pb-0 pe-2">
-                                                <div class="h6 mb-0 clamp-line" data-line="1">Good Glass Teapot</div>
-                                                <div class="text-muted text-small">Ikea</div>
-                                                <div class="mb-0 sw-19">$ 8.50</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 pe-0 d-flex align-items-center">
-                                            <div class="input-group spinner sw-11" data-trigger="spinner">
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-down single px-2 d-flex justify-content-center" data-spin="down">-</button>
-                                                </div>
-                                                <input type="text" class="form-control text-center px-0" value="2" data-rule="quantity" />
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-up single px-2 d-flex justify-content-center" data-spin="up">+</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 d-flex justify-content-end justify-content-md-start align-items-center">
-                                            <div class="h6 mb-0">$ 17.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-sm btn-icon btn-icon-only btn btn-foreground-alternate position-absolute t-2 e-2" type="button">
-                                    <i data-acorn-icon="error-hexagon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="row g-0 sh-18 sh-md-14">
-                            <div class="col-auto">
-                                <img src="/img/product/small/product-4.webp" class="card-img card-img-horizontal h-100 sw-9 sw-sm-13 sw-md-15" alt="thumb" />
-                            </div>
-                            <div class="col position-relative h-100">
-                                <div class="card-body">
-                                    <div class="row h-100">
-                                        <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex align-items-center">
-                                            <div class="pt-0 pb-0 pe-2">
-                                                <div class="h6 mb-0 clamp-line" data-line="1">Modern Dark Pot</div>
-                                                <div class="text-muted text-small">Ikea</div>
-                                                <div class="mb-0 sw-19">$ 18.75</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 pe-0 d-flex align-items-center">
-                                            <div class="input-group spinner sw-11" data-trigger="spinner">
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-down single px-2 d-flex justify-content-center" data-spin="down">-</button>
-                                                </div>
-                                                <input type="text" class="form-control text-center px-0" value="2" data-rule="quantity" />
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-up single px-2 d-flex justify-content-center" data-spin="up">+</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 d-flex justify-content-end justify-content-md-start align-items-center">
-                                            <div class="h6 mb-0">$ 37.50</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-sm btn-icon btn-icon-only btn btn-foreground-alternate position-absolute t-2 e-2" type="button">
-                                    <i data-acorn-icon="error-hexagon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-2">
-                        <div class="row g-0 sh-18 sh-md-14">
-                            <div class="col-auto">
-                                <img src="/img/product/small/product-5.webp" class="card-img card-img-horizontal h-100 sw-9 sw-sm-13 sw-md-15" alt="thumb" />
-                            </div>
-                            <div class="col position-relative h-100">
-                                <div class="card-body">
-                                    <div class="row h-100">
-                                        <div class="col-12 col-md-6 mb-2 mb-md-0 d-flex align-items-center">
-                                            <div class="pt-0 pb-0 pe-2">
-                                                <div class="h6 mb-0 clamp-line" data-line="1">Wood Handle Hunter Knife</div>
-                                                <div class="text-muted text-small">Buck Knives</div>
-                                                <div class="mb-0 sw-19">$ 12.00</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 pe-0 d-flex align-items-center">
-                                            <div class="input-group spinner sw-11" data-trigger="spinner">
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-down single px-2 d-flex justify-content-center" data-spin="down">-</button>
-                                                </div>
-                                                <input type="text" class="form-control text-center px-0" value="3" data-rule="quantity" />
-                                                <div class="input-group-text">
-                                                    <button type="button" class="spin-up single px-2 d-flex justify-content-center" data-spin="up">+</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-md-3 d-flex justify-content-end justify-content-md-start align-items-center">
-                                            <div class="h6 mb-0">$ 36.00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-sm btn-icon btn-icon-only btn btn-foreground-alternate position-absolute t-2 e-2" type="button">
-                                    <i data-acorn-icon="error-hexagon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
                 <!-- Items End -->
-
-                <!-- Banners Start -->
-                <div class="row g-2">
-                    <div class="col-12">
-                        <h2 class="small-title">Worth Checking</h2>
-                    </div>
-                    <div class="col-12 col-sm-6 col-xxl-3">
-                        <div class="card w-100 sh-19 sh-sm-25 hover-img-scale-up">
-                            <img src="/img/banner/cta-square-1.webp" class="card-img h-100 scale" alt="card image" />
-                            <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
-                                <div class="d-flex flex-column h-100 justify-content-between align-items-start">
-                                    <div class="cta-3 text-black w-75 w-sm-50 w-lg-75 w-xxl-50">Seasoned Breads</div>
-                                    <a href="/Storefront/Filters" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
-                                        <i data-acorn-icon="chevron-right"></i>
-                                        <span>View</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-xxl-3">
-                        <div class="card w-100 sh-19 sh-sm-25 hover-img-scale-up">
-                            <img src="/img/banner/cta-square-2.webp" class="card-img h-100 scale" alt="card image" />
-                            <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
-                                <div class="d-flex flex-column h-100 justify-content-between align-items-start">
-                                    <div class="cta-3 text-black w-75 w-sm-50 w-lg-75 w-xxl-50">Herbal and Vegan</div>
-                                    <a href="/Storefront/Filters" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
-                                        <i data-acorn-icon="chevron-right"></i>
-                                        <span>View</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-xxl-3">
-                        <div class="card w-100 sh-19 sh-sm-25 hover-img-scale-up">
-                            <img src="/img/banner/cta-square-3.webp" class="card-img h-100 scale" alt="card image" />
-                            <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
-                                <div class="d-flex flex-column h-100 justify-content-between align-items-start">
-                                    <div class="cta-3 text-black w-75 w-sm-50 w-lg-75 w-xxl-50">Fruit Mixed Dough</div>
-                                    <a href="/Storefront/Filters" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
-                                        <i data-acorn-icon="chevron-right"></i>
-                                        <span>View</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-xxl-3">
-                        <div class="card w-100 sh-19 sh-sm-25 hover-img-scale-up">
-                            <img src="/img/banner/cta-square-4.webp" class="card-img h-100 scale" alt="card image" />
-                            <div class="card-img-overlay d-flex flex-column justify-content-between bg-transparent">
-                                <div class="d-flex flex-column h-100 justify-content-between align-items-start">
-                                    <div class="cta-3 text-black w-75 w-sm-50 w-lg-75 w-xxl-50">Berries and Nuts</div>
-                                    <a href="/Storefront/Filters" class="btn btn-icon btn-icon-start btn-primary mt-3 stretched-link">
-                                        <i data-acorn-icon="chevron-right"></i>
-                                        <span>View</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Banners End -->
             </div>
 
             <div class="col-12 col-lg-auto order-0 order-lg-1">
                 <!-- Summary Start -->
-                <h2 class="small-title">Summary</h2>
+                <h2 class="small-title">Resumo</h2>
                 <div class="card mb-5 w-100 sw-lg-35">
                     <div class="card-body">
                         <div class="mb-4">
                             <div class="mb-2">
                                 <p class="text-small text-muted mb-1">ITEMS</p>
                                 <p>
-                                    <span class="text-alternate">5</span>
+                                    @if (count($cartItems) == 0)
+                                        <span class="text-alternate">0</span>
+                                    @else
+                                        <span class="text-alternate">5</span>
+                                    @endif
                                 </p>
                             </div>
                             <div class="mb-2">
                                 <p class="text-small text-muted mb-1">TOTAL</p>
-                                <p>
-                <span class="text-alternate">
-                  <span class="text-small text-muted">$</span>
-                  285.25
-                </span>
-                                </p>
-                            </div>
-                            <div class="mb-2">
-                                <p class="text-small text-muted mb-1">SHIPPING</p>
-                                <p>
-                <span class="text-alternate">
-                  <span class="text-small text-muted">$</span>
-                  12.50
-                </span>
-                                </p>
-                            </div>
-                            <div class="mb-2">
-                                <p class="text-small text-muted mb-1">SALE</p>
-                                <p>
-                <span class="text-alternate">
-                  <span class="text-small text-muted">$</span>
-                  -24.50
-                </span>
-                                </p>
-                            </div>
-                            <div class="mb-2">
-                                <p class="text-small text-muted mb-1">GRAND TOTAL</p>
                                 <div class="cta-2">
-                <span>
-                  <span class="text-small text-muted cta-2">$</span>
-                  321.50
-                </span>
+                                    <span>
+                                        <span class="text-small text-muted cta-2">$</span>
+                                        @if (count($cartItems) == 0)
+                                            0
+                                        @else
+                                            10
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-icon btn-icon-end btn-primary w-100" type="button">
-                            <span>Checkout</span>
+                        <button class="btn btn-icon btn-icon-end btn-primary w-100 {{ $disabled }}" type="button">
+                            <span>Finalizar</span>
                             <i data-acorn-icon="chevron-right"></i>
                         </button>
                     </div>

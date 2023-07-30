@@ -24,6 +24,7 @@
       this._initBase();
       this._initCommon();
       this._initPages();
+      this._initApps()
     }, 100);
   }
 
@@ -50,6 +51,19 @@
     // common.js initialization
     if (typeof Common !== 'undefined') {
       let common = new Common();
+    }
+  }
+
+  // Application pages initialization
+  _initApps() {
+    if (typeof Contacts !== 'undefined') {
+      let contacts = new Contacts();
+    }
+    else if (typeof Orders !== 'undefined') {
+      let orders = new Orders();
+    }
+    else if (typeof Users !== 'undefined') {
+      let users = new Users();
     }
   }
 

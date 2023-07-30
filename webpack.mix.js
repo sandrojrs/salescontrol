@@ -23,6 +23,13 @@ mix.sass("resources/sass/styles.scss", "public/css")
     .copy("resources/js", "public/js")
     .copy("resources/icon", "public/icon")
     .copy("resources/json", "public/json");
-    if (mix.inProduction()) {
-        mix.version();
+if (mix.inProduction()) {
+    mix.version();
+}
+
+mix.options({
+    hmrOptions: {
+        host: 'localhost',
+        port: 8000,
     }
+ });

@@ -1,6 +1,23 @@
-@extends('layouts.app')
+@php
+    $html_tag_data = [];
+    $title = 'lista de produtos';
+    $description = 'Ecommerce Product List Page';
+@endphp
+@extends('layout', ['html_tag_data' => $html_tag_data, 'title' => $title, 'description' => $description])
+
+@section('css')
+@endsection
+
+@section('js_vendor')
+@endsection
+
+@section('js_page')
+    <script src="/js/cs/checkall.js"></script>
+    <script src="/js/pages/products.list.js"></script>
+@endsection
 
 @section('content')
+    <div class="container">
     <div class="card">
 
         {{-- @if ($message = Session::get('success'))

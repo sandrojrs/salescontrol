@@ -13,6 +13,12 @@
     @include('layouts.head')
 </head>
 
+{{-- <style>
+    .container {
+       max-width: 85% !important;
+    }
+</style> --}}
+
 <body>
 <div id="root">
     <div id="nav" class="nav-container d-flex" @isset($custom_nav_data) @foreach ($custom_nav_data as $key=> $value)
