@@ -69,6 +69,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::view('General', 'settings/general');
     });
 
+    Route::prefix('Settings')->group(function () {
+        Route::view('/', 'shpping/index');
+        Route::view('General', 'settings/general');
+    });
+
     //Route::get('users', [UserController::class, 'index'])->name('users');
 
     // Route::resource('roles', RoleController::class);
@@ -78,7 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('home', HomeController::class);
     Route::get('product/{category}', [ProductController::class, 'productCategory'])->name('product-category');
     Route::get('product/variation/{product}', [ProductController::class, 'productVariation'])->name('product-variation');
-    Route::get('product/details/{productSpecifications}', [ProductController::class, 'productDetails'])->name('product-details');
+    Route::get('product/details/{productSpecifications}/{quantity}', [ProductController::class, 'productDetails'])->name('product-details');
 
     // Route::resource('orders', OrderController::class);
     // Route::resource('profile', ProfileController::class);

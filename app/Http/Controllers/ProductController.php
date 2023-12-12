@@ -39,10 +39,10 @@ class ProductController extends Controller
         return view('products.list', compact('products'));
     }
 
-    public function productDetails(ProductSpecifications $productSpecifications)
+    public function productDetails(ProductSpecifications $productSpecifications, $quantity)
     {
         $productsVariation = ProductSpecifications::find($productSpecifications->id);
-        return view('storefront.detail', compact('productsVariation'));
+        return view('storefront.detail', compact('productsVariation', 'quantity'));
     }
 
     public function productVariation(Product $product)

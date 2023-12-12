@@ -150,7 +150,7 @@
         <!-- Trending Start -->
         <h2 class="small-title">Tendência</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 g-2 mb-5">
-            @foreach ($categories as $category)
+            @foreach ($products as $product)
                 <div class="col">
                     <div class="card h-100">
                         <span class="badge rounded-pill bg-primary me-1 position-absolute s-n2 t-2 z-index-1">SALE</span>
@@ -158,29 +158,13 @@
                         <div class="card-body pb-2">
                             <div class="h6 mb-0 d-flex">
                                 <a href="/Storefront/Detail" class="body-link d-block lh-1-25 stretched-link">
-                                    <span class="clamp-line sh-4" data-line="2">Wooden Animal Toys</span>
+                                    <span class="clamp-line sh-4" data-line="2">{{$product->name}}</span>
                                 </a>
                             </div>
                         </div>
                         <div class="card-footer border-0 pt-0">
-                            <div class="mb-2">
-                                <div class="br-wrapper br-theme-cs-icon d-inline-block">
-                                    <select class="rating" name="rating" autocomplete="off" data-readonly="true"
-                                        data-initial-rating="5">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                                </div>
-                                <div class="text-muted d-inline-block text-small align-text-top">(5)</div>
-                            </div>
-                            <div class="card-text mb-0">
-                                <div class="text-muted text-overline text-small sh-2">
-                                    <del>$ 14.25</del>
-                                </div>
-                                <div>$ 8.50</div>
+                            <div class="card-text mb-0">                                
+                                <div>$ {{$product->price}}</div>
                             </div>
                         </div>
                     </div>

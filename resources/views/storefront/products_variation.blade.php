@@ -61,10 +61,9 @@
                                             </div>
                                         </div>
                                         <p class="card-text">Quantidade disponivel :
-                                            {{ $variation->quantity_available }}<input type="hidden"
-                                                value="{{ $variation->quantity_available }}" name="quantity_available"></p>
-                                        <a href="{{ route('product-details', $variation->id) }}" type="button"
-                                            class="btn btn-sm btn-primary">
+                                            {{ $variation->quantity_available }}</p>
+                                        <a href="{{ route('product-details', [$variation->id, $variation->quantity_available]) }}"
+                                            type="button" class="btn btn-sm btn-primary">
                                             Comprar
                                         </a>
                                     </div>

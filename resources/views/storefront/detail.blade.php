@@ -92,7 +92,7 @@
                                                         <img alt="detail" src="/img/product/large/product-2.webp"
                                                             class="responsive border-0 rounded-md img-fluid mb-3 sh-35 sh-md-45 sh-xl-60 w-100" />
                                                     </a>
-                                                </li>                                               
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -132,51 +132,49 @@
                             <!-- Product Right Side Start -->
                             <div class="col-12 col-xl-5 sh-xl-60 d-flex flex-column justify-content-between">
                                 <div>
-                                    <a class="mb-1 d-inline-block text-small" href="#">{{$productsVariation->product->category->name}}</a>
-                                    <h3 class="mb-4">{{$productsVariation->product->name}}</h3>
-                                    <div class="h4">$ 25.20</div>
-                                    <p class="mt-2 mb-4 sh-11 clamp-line" data-line="4">
-                                       {{$productsVariation->product->description}}
-                                    </p>
-                                    <div class="row g-3 mb-4">
-                                        <div class="mb-3 col-12 col-sm-auto me-1">
-                                            <label class="fw-bold form-label">Tamanho</label>
-                                            <div class="pt-1">
-                                                <div class="form-check form-check-inline">
-                                                    <input type="radio" class="form-check-input" name="inlineRadio"
-                                                        id="inlineRadio1" checked />
-                                                    <label class="form-check-label" for="inlineRadio1">{{$productsVariation->size}}</label>
+                                    <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" value="{{ $productsVariation->id }}" name="id">
+                                        <input type="hidden"value="{{ $productsVariation->product->name }}" name="name">
+                                        <input type="hidden"value="{{ $productsVariation->product->price }}" name="price">
+                                        <input type="hidden" value="{{ $quantity }}" name="quantity_available">
+                                        <input type="hidden" value="{{ $productsVariation->size }}" name="size">
+                                        <a class="mb-1 d-inline-block text-small"
+                                            href="#">{{ $productsVariation->product->category->name }}</a>
+                                        <h3 class="mb-4">{{ $productsVariation->product->name }}</h3>
+                                        <div class="h4">$ 25.20</div>
+                                        <p class="mt-2 mb-4 sh-11 clamp-line" data-line="4">
+                                            {{ $productsVariation->product->description }}
+                                        </p>
+                                        <div class="row g-3 mb-4">
+                                            <div class="mb-3 col-12 col-sm-auto me-1">
+                                                <label class="fw-bold form-label">Tamanho</label>
+                                                <div class="pt-1">
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="radio" class="form-check-input" name="inlineRadio"
+                                                            id="inlineRadio1" checked />
+                                                        <label class="form-check-label"
+                                                            for="inlineRadio1">{{ $productsVariation->size }}</label>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="mb-3 col-auto">
+                                                <label class="fw-bold form-label">Quantidade</label>
+                                                <select class="sw-10 select-single-no-search" name="quantity">
+                                                    @foreach (range(1, $quantity) as $y)
+                                                        <option>{{ $y }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="mb-3 col-auto">
-                                            <label class="fw-bold form-label">Quantidade</label>
-                                            <select class="sw-10 select-single-no-search">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                <option>6</option>
-                                                <option>7</option>
-                                                <option>8</option>
-                                                <option>9</option>
-                                                <option>10</option>
-                                            </select>
+                                        <div>
+                                            <button type="submit"
+                                                class="btn btn-sm btn-primary {{ $quantity == 0 ? 'disabled' : null }}">
+                                                {{ $quantity == 0 ? 'Produto sem estoque' : 'Adicionar ao carrinho' }}
+                                            </button>
                                         </div>
-                                    </div>
-                                    <div>
-                                        {{-- <a class="btn btn-icon btn-icon-end btn-outline-primary me-sm-1 mb-1 mb-sm-0 w-100 w-sm-auto" href="/Storefront/Checkout">
-                                            <span>Purchase</span>
-                                            <i data-acorn-icon="check-square"></i>
-                                        </a> --}}
-                                        <a class="btn btn-icon btn-icon-end btn-primary w-100 w-sm-auto"
-                                            href="/Storefront/Cart">
-                                            <span>Adicionar ao Carrinho</span>
-                                            <i data-acorn-icon="cart"></i>
-                                        </a>
-                                    </div>
-                                </div>                                
+                                    </form>
+                                </div>
                             </div>
                             <!-- Product Right Side End -->
                         </div>
@@ -186,3 +184,30 @@
         </div>
     </div>
 @endsection
+
+
+{{-- <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <p class="card-text"><input type="hidden" value="{{ $variation->id }}" name="id">
+    </p>
+    <p class="card-text">{{ $variation->name }}<input type="hidden" value="{{ $variation->name }}"
+            name="name"></p>
+    <p class="card-text"> tamanho <span class="badge text-bg-success">{{ $variation->size }}</span></p>
+    <p class="card-text">R$:{{ $variation->price }}<input type="hidden" value="{{ $variation->price }}"
+            name="price"></p>
+
+    <p class="card-text">Quantidade disponivel : {{ $variation->quantity_available }}<input type="hidden"
+            value="{{ $variation->quantity_available }}" name="quantity_available"></p>
+
+    <input type="hidden" value="1" name="quantity">
+    <input type="hidden" value="{{ $variation->id }}" name="product_specifications_id">
+    <input type="hidden" value="{{ $variation->size }}" name="size">
+
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+            <button type="submit"
+                class="btn btn-sm btn-outline-secondary {{ $variation->quantity_available == 0 ? 'disabled' : null }}">
+                {{ $variation->quantity_available == 0 ? 'Produto sem estoque' : 'Adicionar ao carrinho' }} </button>
+        </div>
+    </div>
+</form> --}}

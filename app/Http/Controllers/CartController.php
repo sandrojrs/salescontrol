@@ -34,6 +34,7 @@ class CartController extends Controller
 
     public function updateCart(Request $request)
     {
+        //dd($request);
         \Cart::update(
             $request->id,
             [

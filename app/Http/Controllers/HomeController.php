@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,8 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('storefront/home', compact('categories'));
+        $products = Product::all();
+        return view('storefront/home', compact('categories', 'products'));
     }
 
     public function login()
